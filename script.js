@@ -5,6 +5,45 @@ window.addEventListener('load', () => {
   }, 2200);
 });
 
+/* ─── THEME TOGGLE ─── */
+const themeToggle = document.getElementById('theme-toggle');
+const themeStorageKey = 'portfolio-theme';
+const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+
+function getSavedTheme() {
+  try {
+    return localStorage.getItem(themeStorageKey);
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveTheme(theme) {
+  try {
+    localStorage.setItem(themeStorageKey, theme);
+  } catch (error) {
+    return;
+  }
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.setAttribute('aria-pressed', theme === 'light');
+  themeToggle.setAttribute(
+    'aria-label',
+    theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'
+  );
+}
+
+const savedTheme = getSavedTheme();
+applyTheme(savedTheme || (prefersLight.matches ? 'light' : 'dark'));
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+  saveTheme(nextTheme);
+  applyTheme(nextTheme);
+});
+
 /* ─── CURSOR ─── */
 const dot = document.getElementById('cursor-dot');
 const ring = document.getElementById('cursor-ring');
