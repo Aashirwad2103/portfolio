@@ -75,7 +75,7 @@ ham.addEventListener('click', () => navLinks.classList.toggle('open'));
 /* ─── PARTICLE CANVAS ─── */
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
-const COLORS = ['#3b1ff7', '#ff1f8e', '#00e5ff', '#ffaa00'];
+const COLORS = ['#6366f1', '#a855f7', '#06b6d4'];
 let W, H, particles = [];
 
 function resize() {
