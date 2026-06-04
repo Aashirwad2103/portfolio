@@ -176,3 +176,67 @@ const skillObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 
 skillFills.forEach((el) => skillObs.observe(el));
+
+/* ─── CONTACT FORM with EmailJS ─── */
+(function() {
+  emailjs.init("iu8LEMcXAiYHdupfY");
+})();
+
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('#submit-btn');
+    const originalBtnText = submitBtn.innerHTML;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending...';
+
+    const templateParams = {
+      to_email: 'aashirwad2103@gmail.com',
+      from_email: document.getElementById('email').value,
+      from_name: document.getElementById('name').value,
+      message: document.getElementById('message').value
+    };
+
+    emailjs.send('service_z0lu2yp', 'template_i7n5e91', templateParams)
+      .then(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
+        formStatus.className = 'form-status success';
+        contactForm.reset();
+        setTimeout(() => {
+          formStatus.textContent = '';
+          formStatus.className = 'form-status';
+        }, 5000);
+      })
+      .catch((error) => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        formStatus.textContent = 'Error sending message. Please try again.';
+        formStatus.className = 'form-status error';
+        console.error('EmailJS error:', error);
+      });
+  });
+}
+
+/* ─── SCROLL TO TOP ─── */
+const scrollTopBtn = document.getElementById('scroll-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 500) {
+    scrollTopBtn.classList.add('visible');
+  } else {
+    scrollTopBtn.classList.remove('visible');
+  }
+});
+
+scrollTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
