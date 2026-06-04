@@ -177,7 +177,11 @@ const skillObs = new IntersectionObserver((entries) => {
 
 skillFills.forEach((el) => skillObs.observe(el));
 
-/* ─── CONTACT FORM ─── */
+/* ─── CONTACT FORM with EmailJS ─── */
+(function() {
+  emailjs.init("iu8LEMcXAiYHdupfY");
+})();
+
 const contactForm = document.getElementById('contact-form');
 const formStatus = document.getElementById('form-status');
 
@@ -187,26 +191,35 @@ if (contactForm) {
     const submitBtn = contactForm.querySelector('#submit-btn');
     const originalBtnText = submitBtn.innerHTML;
 
-    // Loading state
     submitBtn.disabled = true;
     submitBtn.innerHTML = 'Sending...';
 
-    // Simulate form submission
-    setTimeout(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+    const templateParams = {
+      to_email: 'aashirwad2103@gmail.com',
+      from_email: document.getElementById('email').value,
+      from_name: document.getElementById('name').value,
+      message: document.getElementById('message').value
+    };
 
-      formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
-      formStatus.className = 'form-status success';
-
-      contactForm.reset();
-
-      // Clear status after 5 seconds
-      setTimeout(() => {
-        formStatus.textContent = '';
-        formStatus.className = 'form-status';
-      }, 5000);
-    }, 1500);
+    emailjs.send('service_z0lu2yp', 'template_i7n5e91', templateParams)
+      .then(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        formStatus.textContent = 'Message sent successfully! I will get back to you soon.';
+        formStatus.className = 'form-status success';
+        contactForm.reset();
+        setTimeout(() => {
+          formStatus.textContent = '';
+          formStatus.className = 'form-status';
+        }, 5000);
+      })
+      .catch((error) => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        formStatus.textContent = 'Error sending message. Please try again.';
+        formStatus.className = 'form-status error';
+        console.error('EmailJS error:', error);
+      });
   });
 }
 
