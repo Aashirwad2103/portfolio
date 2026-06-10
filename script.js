@@ -240,3 +240,73 @@ scrollTopBtn.addEventListener('click', () => {
     behavior: 'smooth'
   });
 });
+
+/* ─── AI CHATBOT LOGIC ─── */
+const chatKnowledge = {
+  experience: "Aashirwad is a Software Development Engineer with experience at ZopSmart (Jan 2024 – May 2025). He worked on Java Spring Boot microservices, Kafka integration, and improved API response times by 50%.",
+  skills: "His technical arsenal includes Java, Spring Boot, Microservices, Kafka, Docker, Kubernetes, Azure, MySQL, and React.",
+  education: "Aashirwad holds a Bachelor of Technology in Computer Science Engineering from Lovely Professional University (2020-2024) with a CGPA of 8.18.",
+  projects: "Featured projects include an E-Commerce Website (Java/Spring Boot), a Real-Time Chat App (React/Node.js), and a CI/CD Deployment Pipeline.",
+  contact: "You can reach Aashirwad via email at aashirwad2103@gmail.com or by phone at +91 8699141864. He is based in Bangalore, India.",
+  default: "I'm not sure I understand. You can ask about Aashirwad's experience, skills, education, projects, or contact details!"
+};
+
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+const chatToggle = document.getElementById('chat-toggle');
+const chatWindow = document.getElementById('chat-window');
+
+function appendMessage(text, isBot) {
+  const msgDiv = document.createElement('div');
+  msgDiv.className = `message ${isBot ? 'bot-msg' : 'user-msg'}`;
+  msgDiv.textContent = text;
+  chatMessages.appendChild(msgDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getBotResponse(input) {
+  const query = input.toLowerCase();
+  if (query.includes('experience') || query.includes('work') || query.includes('zopsmart')) return chatKnowledge.experience;
+  if (query.includes('skill') || query.includes('tech') || query.includes('know')) return chatKnowledge.skills;
+  if (query.includes('education') || query.includes('college') || query.includes('university') || query.includes('lpu')) return chatKnowledge.education;
+  if (query.includes('project') || query.includes('build')) return chatKnowledge.projects;
+  if (query.includes('contact') || query.includes('email') || query.includes('phone') || query.includes('reach')) return chatKnowledge.contact;
+  return chatKnowledge.default;
+}
+
+function handleBotReply(userInput) {
+  const typingDiv = document.createElement('div');
+  typingDiv.className = 'message bot-msg typing-indicator';
+  typingDiv.textContent = 'Typing...';
+  chatMessages.appendChild(typingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  setTimeout(() => {
+    chatMessages.removeChild(typingDiv);
+    const response = getBotResponse(userInput);
+    appendMessage(response, true);
+  }, 1000);
+}
+
+chatToggle.addEventListener('click', () => {
+  const isVisible = chatWindow.style.display === 'flex';
+  chatWindow.style.display = isVisible ? 'none' : 'flex';
+  chatToggle.querySelector('.chat-open-icon').style.display = isVisible ? 'block' : 'none';
+  chatToggle.querySelector('.chat-close-icon').style.display = isVisible ? 'none' : 'block';
+  if (!isVisible) chatInput.focus();
+});
+
+function sendMessage() {
+  const text = chatInput.value.trim();
+  if (text) {
+    appendMessage(text, false);
+    chatInput.value = '';
+    handleBotReply(text);
+  }
+}
+
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') sendMessage();
+});
