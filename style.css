@@ -10,7 +10,7 @@
   --surface: rgba(255,255,255,0.04);
   --border: rgba(255,255,255,0.08);
   --text: #e8e8f0;
-  --muted: #6e6e88;
+  --muted: #a1a1b5;
   --page-bg:
     radial-gradient(circle at 18% 16%, rgba(59,31,247,.16), transparent 28rem),
     radial-gradient(circle at 82% 12%, rgba(255,31,142,.13), transparent 26rem),
@@ -984,5 +984,32 @@ footer {
     width: calc(100vw - 2rem);
     height: 400px;
     right: -1rem;
+  }
+}
+
+/* ─── ACCESSIBILITY ─── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+
+  #cursor-dot, #cursor-ring {
+    display: none !important;
+  }
+
+  .hero-card-wrap {
+    animation: none !important;
   }
 }

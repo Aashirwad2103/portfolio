@@ -55,6 +55,9 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function animCursor() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
   dot.style.left = mx + 'px';
   dot.style.top = my + 'px';
   rx += (mx - rx) * 0.12;
@@ -309,4 +312,21 @@ function sendMessage() {
 chatSend.addEventListener('click', sendMessage);
 chatInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') sendMessage();
+});
+
+/* ─── KEYBOARD ACCESSIBILITY ─── */
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    // Close mobile menu
+    if (navLinks.classList.contains('open')) {
+      navLinks.classList.remove('open');
+    }
+    // Close chat window
+    if (chatWindow.style.display === 'flex') {
+      chatWindow.style.display = 'none';
+      chatToggle.querySelector('.chat-open-icon').style.display = 'block';
+      chatToggle.querySelector('.chat-close-icon').style.display = 'none';
+      chatToggle.focus();
+    }
+  }
 });

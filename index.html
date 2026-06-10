@@ -28,11 +28,11 @@
 <body>
 
 <!-- CURSOR -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
 <!-- LOADER -->
-<div id="loader">
+<div id="loader" aria-hidden="true">
   <div class="loader-initials">AA</div>
   <div class="loader-bar-wrap">
     <div class="loader-bar"></div>
@@ -40,11 +40,11 @@
 </div>
 
 <!-- PARTICLE CANVAS -->
-<canvas id="particle-canvas"></canvas>
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
 
 <!-- NAV -->
 <nav id="navbar">
-  <div class="nav-logo">Aashirwad.</div>
+  <div class="nav-logo" aria-label="Aashirwad Portfolio Home">Aashirwad.</div>
   <ul class="nav-links" id="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -64,7 +64,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left reveal">
-    <div class="avail-tag"><div class="avail-dot"></div>Open to Opportunities</div>
+    <div class="avail-tag"><div class="avail-dot" aria-hidden="true"></div>Open to Opportunities</div>
     <h1 class="hero-name">Aashirwad</h1>
     <p class="hero-sub">
       <strong>Software Development Engineer</strong> · Java Spring Boot · Microservices · Cloud
@@ -75,8 +75,8 @@
     </div>
   </div>
   <div class="hero-right reveal right">
-    <div class="hero-orb"></div>
-    <div class="hero-ring"></div>
+    <div class="hero-orb" aria-hidden="true"></div>
+    <div class="hero-ring" aria-hidden="true"></div>
     <div class="hero-card-wrap">
       <div class="hero-card">
         <div class="card-avatar">AA</div>
@@ -205,7 +205,7 @@
   <h2 class="section-title reveal">Work <span>Experience</span></h2>
   <div class="timeline">
     <div class="tl-item reveal left">
-      <div class="tl-dot"></div>
+      <div class="tl-dot" aria-hidden="true"></div>
       <div class="tl-card">
         <div class="tl-meta">
           <span class="tl-company">ZopSmart</span>
@@ -240,7 +240,7 @@
   <h2 class="section-title reveal">Featured <span>Projects</span></h2>
   <div class="projects-grid">
     <div class="proj-card reveal">
-      <span class="proj-emoji">🛒</span>
+      <span class="proj-emoji" role="img" aria-label="E-commerce Icon">🛒</span>
       <div class="proj-name">E-Commerce Website</div>
       <p class="proj-desc">A fully functional e-commerce web application with product catalog, user accounts, cart functionality, and role-based access control for Admin and User roles. Seamless database integration via Hibernate/JPA.</p>
       <div class="proj-tags">
@@ -263,7 +263,7 @@
       </div>
     </div>
     <div class="proj-card reveal" style="transition-delay:.1s">
-      <span class="proj-emoji">💬</span>
+      <span class="proj-emoji" role="img" aria-label="Chat Icon">💬</span>
       <div class="proj-name">Real Time Chat App</div>
       <p class="proj-desc">A real-time web-based chat application enabling seamless communication between users. Features include user authentication, message threading, and multimedia sharing — built with a modern JS stack.</p>
       <div class="proj-tags">
@@ -286,7 +286,7 @@
       </div>
     </div>
     <div class="proj-card reveal" style="transition-delay:.2s">
-      <span class="proj-emoji">⚡</span>
+      <span class="proj-emoji" role="img" aria-label="Lightning Icon">⚡</span>
       <div class="proj-name">CI/CD Deployment Pipeline</div>
       <p class="proj-desc">Designed and implemented an automated deployment pipeline that triggers test suites on every PR, validates deployments across environments, and enforces code stability — reducing rollbacks by 70%.</p>
       <div class="proj-tags">
@@ -313,7 +313,7 @@
   <h2 class="section-title reveal"><span>Education</span></h2>
   <div class="edu-grid">
     <div class="edu-card reveal left">
-      <div class="edu-icon">🎓</div>
+      <div class="edu-icon" role="img" aria-label="Education Icon">🎓</div>
       <div class="edu-degree">Bachelor of Technology — Computer Science Engineering</div>
       <div class="edu-inst">Lovely Professional University</div>
       <div class="edu-dates">Aug 2020 – Aug 2024 · Phagwara, Punjab</div>
@@ -329,28 +329,28 @@
   <div class="contact-grid">
     <div class="contact-left reveal left">
       <div class="contact-card">
-        <div class="contact-icon ci-email">📧</div>
+        <div class="contact-icon ci-email" role="img" aria-label="Email Icon">📧</div>
         <div>
           <div class="contact-label">Email</div>
           <div class="contact-val">aashirwad2103@gmail.com</div>
         </div>
       </div>
       <div class="contact-card">
-        <div class="contact-icon ci-phone">📱</div>
+        <div class="contact-icon ci-phone" role="img" aria-label="Phone Icon">📱</div>
         <div>
           <div class="contact-label">Phone</div>
           <div class="contact-val">+91 8699141864</div>
         </div>
       </div>
       <div class="contact-card">
-        <div class="contact-icon ci-loc">📍</div>
+        <div class="contact-icon ci-loc" role="img" aria-label="Location Icon">📍</div>
         <div>
           <div class="contact-label">Location</div>
           <div class="contact-val">Bangalore, India</div>
         </div>
       </div>
       <div class="contact-card">
-        <div class="contact-icon ci-avail">✅</div>
+        <div class="contact-icon ci-avail" role="img" aria-label="Availability Icon">✅</div>
         <div>
           <div class="contact-label">Status</div>
           <div class="contact-val">Open to New Opportunities</div>
@@ -443,7 +443,7 @@
       <div class="message bot-msg">Hi! I'm Aashirwad's AI assistant. Ask me anything about his experience, skills, or projects!</div>
     </div>
     <div class="chat-input-area">
-      <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+      <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" aria-label="Chat message input">
       <button id="chat-send" aria-label="Send Message">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
       </button>
