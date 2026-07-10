@@ -10,7 +10,7 @@
   --surface: rgba(255,255,255,0.04);
   --border: rgba(255,255,255,0.08);
   --text: #e8e8f0;
-  --muted: #6e6e88;
+  --muted: #a1a1b5;
   --page-bg:
     radial-gradient(circle at 18% 16%, rgba(59,31,247,.16), transparent 28rem),
     radial-gradient(circle at 82% 12%, rgba(255,31,142,.13), transparent 26rem),
@@ -62,7 +62,7 @@
 
 /* ─── RESET & BASE ─── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;font-size:16px;}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden;}
 body{
   background:var(--page-bg);
   color:var(--text);
@@ -784,13 +784,13 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
-  #hero{flex-direction:column;padding-top:8rem;padding-bottom:4rem;text-align:center;}
+  #hero{flex-direction:column;padding-top:8rem;padding-bottom:4rem;text-align:center;overflow:hidden;}
+  .hero-left{width:100%;min-width:0;}
   .hero-btns{justify-content:center;}
-  .hero-right{flex:unset;}
+  .hero-right{flex:unset;width:100%;max-width:380px;overflow:hidden;}
   .skills-grid{grid-template-columns:1fr;}
   .projects-grid{grid-template-columns:1fr 1fr;}
   .contact-grid{grid-template-columns:1fr;}
-  .contact-right{display:none;}
 }
 @media(max-width:600px){
   .nav-links{display:none;margin-left:0;}
@@ -799,6 +799,29 @@ footer {
   .nav-hamburger{display:flex;}
   .projects-grid{grid-template-columns:1fr;}
   section{padding:5rem 5%;}
+  .hero-name{
+    font-size: 3.5rem !important;
+    letter-spacing: -1.5px !important;
+  }
+  .hero-card{
+    width:100%;
+    max-width:320px;
+  }
+  .hero-orb{
+    width:320px;
+    height:320px;
+  }
+  .hero-ring{
+    width:300px;
+    height:300px;
+  }
+  /* Suppress horizontal translate reveals on mobile to prevent overflow */
+  .reveal.left, .reveal.right {
+    transform: translateY(20px) !important;
+  }
+  .reveal.visible {
+    transform: none !important;
+  }
 }
 
 /* ─── AI CHATBOT ─── */
@@ -984,5 +1007,32 @@ footer {
     width: calc(100vw - 2rem);
     height: 400px;
     right: -1rem;
+  }
+}
+
+/* ─── ACCESSIBILITY ─── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    cursor: auto !important;
+  }
+
+  #cursor-dot, #cursor-ring {
+    display: none !important;
+  }
+
+  .hero-card-wrap {
+    animation: none !important;
   }
 }
